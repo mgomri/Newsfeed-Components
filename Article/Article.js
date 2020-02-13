@@ -112,3 +112,68 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function panelMaker(title, date, firstParagraph, secondParagraph, thirdParagraph){
+const article = document.createElement('div');
+const articleTitle = document.createElement('h2');
+const articleDate = document.createElement('p');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const buttonOpen = document.createElement('span');
+const buttonClose = document.createElement('span');
+
+//add classes.
+article.classList.add('article');
+articleDate.classList.add('date');
+buttonOpen.classList.add('expandButton');
+buttonClose.classList.add('expandButton');
+
+
+
+//add content
+articleTitle.textContent = title;
+articleDate.textContent = date;
+p1.textContent = firstParagraph;
+p2.textContent = secondParagraph;
+p3.textContent = thirdParagraph;
+buttonOpen.textContent = '\u2bc6';
+buttonClose.textContent = '\u2bc5';
+
+//append components
+article.appendChild(articleTitle);
+article.appendChild(articleDate);
+article.appendChild(buttonOpen);
+// article.appendChild(buttonClose);
+
+article.appendChild(p1);
+article.appendChild(p2);
+article.appendChild(p3);
+
+
+
+ buttonOpen.addEventListener('click', function (event) {
+   article.classList.toggle('article-open');
+  article.removeChild(buttonOpen);
+  article.appendChild(buttonClose);
+   
+ } );
+
+ buttonClose.addEventListener('click', event => {
+   article.classList.toggle('article-open');
+   article.removeChild(buttonClose);
+   article.appendChild(buttonOpen);
+ });
+
+
+return article;
+
+};
+
+
+const articles = document.querySelector('.articles');
+
+data.map(ele => {
+  articles.appendChild(panelMaker(ele.title, ele.date, ele.firstParagraph, ele.secondParagraph, ele.thirdParagraph))
+});
+
